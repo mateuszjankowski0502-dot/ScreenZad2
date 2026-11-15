@@ -4,6 +4,7 @@ package com.example.rejestracjawarsztaty;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -11,6 +12,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class SummaryActivity extends AppCompatActivity {
+
+    private static final String TAG = "CykleAktywnosci";
 
     public static final String EXTRA_NAME = "EXTRA_NAME";
     public static final String EXTRA_EMAIL = "EXTRA_EMAIL";
@@ -23,6 +26,7 @@ public class SummaryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "SummaryActivity: onCreate");
         setContentView(R.layout.activity_summary);
 
         TextView tvSummary = findViewById(R.id.tvSummary);
@@ -67,16 +71,22 @@ public class SummaryActivity extends AppCompatActivity {
         btnShare.setOnClickListener(v -> shareSummary());
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(TAG, "SummaryActivity: onStop");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "SummaryActivity: onDestroy");
+    }
+
     private void shareSummary() {
-
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
-
         shareIntent.setType("text/plain");
-
-        shareIntent.putExtra(
-                Intent.EXTRA_TEXT,
-                summaryText
-        );
+        shareIntent.putExtra(Intent.EXTRA_TEXT, summaryText);
 
         try {
             Intent chooser = Intent.createChooser(
@@ -87,7 +97,6 @@ public class SummaryActivity extends AppCompatActivity {
             startActivity(chooser);
 
         } catch (ActivityNotFoundException e) {
-
             Toast.makeText(
                     this,
                     R.string.share_error,

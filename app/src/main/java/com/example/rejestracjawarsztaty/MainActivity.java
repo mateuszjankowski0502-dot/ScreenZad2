@@ -3,6 +3,7 @@ package com.example.rejestracjawarsztaty;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -17,12 +18,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "CykleAktywnosci";
+
     private EditText etName;
     private EditText etEmail;
     private EditText etAge;
     private Spinner spWorkshop;
     private CheckBox cbExperience;
     private Button btnNext;
+    private Button btnAbout;
 
     private final ActivityResultLauncher<Intent> summaryLauncher =
             registerForActivityResult(
@@ -47,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "MainActivity: onCreate");
         setContentView(R.layout.activity_main);
 
         etName = findViewById(R.id.etName);
@@ -55,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         spWorkshop = findViewById(R.id.spWorkshop);
         cbExperience = findViewById(R.id.cbExperience);
         btnNext = findViewById(R.id.btnNext);
+        btnAbout = findViewById(R.id.btnAbout);
 
         ArrayAdapter<CharSequence> adapter =
                 ArrayAdapter.createFromResource(
@@ -70,10 +76,26 @@ public class MainActivity extends AppCompatActivity {
         spWorkshop.setAdapter(adapter);
 
         btnNext.setOnClickListener(v -> validateForm());
+
+        btnAbout.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, AboutActivity.class);
+            startActivity(intent);
+        });
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(TAG, "MainActivity: onStop");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "MainActivity: onDestroy");
     }
 
     private void validateForm() {
-
         String name = etName.getText().toString().trim();
         String email = etEmail.getText().toString().trim();
         String ageText = etAge.getText().toString().trim();
@@ -115,11 +137,7 @@ public class MainActivity extends AppCompatActivity {
         String workshop = spWorkshop.getSelectedItem().toString();
         boolean experience = cbExperience.isChecked();
 
-        Intent intent = new Intent(
-                MainActivity.this,
-                SummaryActivity.class
-        );
-
+        Intent intent = new Intent(MainActivity.this, SummaryActivity.class);
         intent.putExtra(SummaryActivity.EXTRA_NAME, name);
         intent.putExtra(SummaryActivity.EXTRA_EMAIL, email);
         intent.putExtra(SummaryActivity.EXTRA_AGE, age);
