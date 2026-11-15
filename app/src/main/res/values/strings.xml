@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Rejestracja Warsztaty</string>
+
+    <string name="title_form">Formularz rejestracyjny</string>
+    <string name="label_name">Imię i nazwisko</string>
+    <string name="label_email">Adres e-mail</string>
+    <string name="label_age">Wiek</string>
+    <string name="label_workshop">Wybierz warsztat</string>
+    <string name="label_experience">Mam doświadczenie</string>
+    <string name="btn_next">DALEJ</string>
+
+    <string name="error_name">Wpisz imię i nazwisko.</string>
+    <string name="error_email">Wpisz poprawny adres e-mail.</string>
+    <string name="error_age">Wiek musi wynosić od 13 do 100 lat.</string>
+
+    <string-array name="workshops">
+        <item>Programowanie w Javie</item>
+        <item>Tworzenie aplikacji Android</item>
+        <item>Projektowanie stron WWW</item>
+    </string-array>
+
+    <string name="title_summary">Podsumowanie zgłoszenia</string>
+    <string name="summary_format">Imię i nazwisko: %1$s\nE-mail: %2$s\nWiek: %3$d\nWarsztat: %4$s\nDoświadczenie: %5$s</string>
+    <string name="yes">Tak</string>
+    <string name="no">Nie</string>
+
+    <string name="btn_confirm">POTWIERDŹ</string>
+    <string name="btn_cancel">ANULUJ</string>
+    <string name="success_message">Zgłoszenie zostało potwierdzone!</string>
+    <string name="cancel_message">Zgłoszenie nie zostało potwierdzone.</string>
+
+    <string name="btn_share">UDOSTĘPNIJ ZGŁOSZENIE</string>
+    <string name="share_title">Udostępnij zgłoszenie</string>
+    <string name="share_error">Nie udało się otworzyć udostępniania.</string>
+</resources>
